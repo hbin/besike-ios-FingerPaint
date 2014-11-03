@@ -24,6 +24,11 @@ class CanvasView: UIView {
         }
     }
 
+    func clear() {
+        self.paths = []
+        self.setNeedsLayout()
+    }
+
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         CGContextBeginPath(context)

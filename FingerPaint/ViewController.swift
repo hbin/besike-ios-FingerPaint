@@ -10,9 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var canvasView: CanvasView!
+    weak var canvasView: CanvasView!
+    weak var clearButton: UIButton!
 
-    var selectedColorPicker: UIButton? {
+    weak var selectedColorPicker: UIButton? {
         didSet {
             selectedColorPicker!.layer.shadowColor = UIColor(white: 0.4, alpha: 1).CGColor
             selectedColorPicker!.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -33,6 +34,7 @@ class ViewController: UIViewController {
         self.view.addSubview(self.canvasView)
 
         setupColorPickers()
+        setupClearButton()
     }
 
     func colorPickerTapped(button: UIButton) {
@@ -41,6 +43,10 @@ class ViewController: UIViewController {
         }
 
         self.selectedColorPicker = button
+    }
+
+    func clearButtonTapped(button: UIButton) {
+        self.canvasView.clear()
     }
 
     private func setupColorPickers() {
@@ -73,6 +79,16 @@ class ViewController: UIViewController {
 
             button.addTarget(self, action: "colorPickerTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         }
+    }
+
+    private func setupClearButton() {
+        let button = UIButton.buttonWithType(UIButtonType.System) as UIButton
+        self.clearButton = button
+        button.frame = CGRect(x: 267, y: 518, width: 37, height: 30)
+        button.setTitle("Clear", forState: UIControlState.Normal)
+        self.view.addSubview(button)
+
+        button.addTarget(self, action: "clearButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
     }
 }
 
