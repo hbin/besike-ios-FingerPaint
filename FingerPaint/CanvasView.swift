@@ -9,7 +9,8 @@
 import UIKit
 
 class CanvasView: UIView {
-    let zigzag = [(100, 100), (100, 150), (150, 150), (150, 200)]
+    var paths = [Path]()
+    private var newPath: Path?
 
     var currentColor: CGColor = UIColor.redColor().CGColor {
         didSet {
@@ -17,27 +18,61 @@ class CanvasView: UIView {
         }
     }
 
-    override func drawRect(rect: CGRect) {
-        var path   = Path()
-        zigzag.map { path.addPoint($0.0, $0.1) }
+    var currentLineWidth: CGFloat = 2 {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
 
+    override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         CGContextBeginPath(context)
-        CGContextAddLines(context, path.points, UInt(path.points.count))
-        CGContextSetStrokeColorWithColor(context, self.currentColor)
-        CGContextStrokePath(context);
+
+        for path in paths {
+            CGContextAddLines(context, path.points, UInt(path.points.count))
+            CGContextSetStrokeColorWithColor(context, path.color)
+            CGContextSetLineWidth(context, path.width)
+            CGContextStrokePath(context);
+        }
+    }
+
+    // *** Draw when user touches the screen ***
+
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.newPath = Path(color: self.currentColor, width: self.currentLineWidth)
+        self.paths.append(self.newPath!)
+        addToPath(touches)
+    }
+
+    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+        addToPath(touches)
+        self.setNeedsDisplay()
+    }
+
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        addToPath(touches)
+        self.newPath = nil
+    }
+
+    private func addToPath(touches: NSSet) {
+        let t = touches.anyObject() as UITouch
+        let point = t.locationInView(self)
+
+        self.newPath?.add(point)
     }
 }
 
 class Path {
     var points: [CGPoint] = []
+    let color: CGColor
+    let width: CGFloat
 
-    func addPoint(newPoint: CGPoint) {
-        self.points.append(newPoint)
+    init(color: CGColor, width: CGFloat) {
+        self.color = color
+        self.width = width
     }
 
-    func addPoint(x: Int, _ y: Int) {
-        var newPoint = CGPoint(x: x, y: y)
+    func add(newPoint: CGPoint) {
         self.points.append(newPoint)
     }
 }
