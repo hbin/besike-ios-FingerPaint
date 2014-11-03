@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		810E87581A038CAD00154B14 /* SpecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E87571A038CAD00154B14 /* SpecTests.swift */; };
+		810E875A1A038DC400154B14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81279A9C1A02954100F32367 /* ViewController.swift */; };
+		810E875B1A0390A800154B14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81279A9A1A02954100F32367 /* AppDelegate.swift */; };
+		810E875C1A0390AD00154B14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81279A9E1A02954100F32367 /* Main.storyboard */; };
+		810E875E1A03919100154B14 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E875D1A03919100154B14 /* CanvasView.swift */; };
+		810E875F1A0391A300154B14 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E875D1A03919100154B14 /* CanvasView.swift */; };
 		81279A9B1A02954100F32367 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81279A9A1A02954100F32367 /* AppDelegate.swift */; };
 		81279A9D1A02954100F32367 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81279A9C1A02954100F32367 /* ViewController.swift */; };
 		81279AA01A02954100F32367 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81279A9E1A02954100F32367 /* Main.storyboard */; };
@@ -26,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		810E87571A038CAD00154B14 /* SpecTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecTests.swift; sourceTree = "<group>"; };
+		810E875D1A03919100154B14 /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		81279A951A02954100F32367 /* FingerPaint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FingerPaint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81279A991A02954100F32367 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81279A9A1A02954100F32367 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		810E87561A038CAD00154B14 /* spec */ = {
+			isa = PBXGroup;
+			children = (
+				810E87571A038CAD00154B14 /* SpecTests.swift */,
+			);
+			path = spec;
+			sourceTree = "<group>";
+		};
 		81279A8C1A02954100F32367 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +95,7 @@
 			children = (
 				81279A9A1A02954100F32367 /* AppDelegate.swift */,
 				81279A9C1A02954100F32367 /* ViewController.swift */,
+				810E875D1A03919100154B14 /* CanvasView.swift */,
 				81279A9E1A02954100F32367 /* Main.storyboard */,
 				81279AA11A02954100F32367 /* Images.xcassets */,
 				81279AA31A02954100F32367 /* LaunchScreen.xib */,
@@ -98,6 +115,7 @@
 		81279AAD1A02954100F32367 /* FingerPaintTests */ = {
 			isa = PBXGroup;
 			children = (
+				810E87561A038CAD00154B14 /* spec */,
 				81279AB01A02954100F32367 /* FingerPaintTests.swift */,
 				81279AAE1A02954100F32367 /* Supporting Files */,
 			);
@@ -202,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				810E875C1A0390AD00154B14 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +233,7 @@
 			files = (
 				81279A9D1A02954100F32367 /* ViewController.swift in Sources */,
 				81279A9B1A02954100F32367 /* AppDelegate.swift in Sources */,
+				810E875E1A03919100154B14 /* CanvasView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +241,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				810E875B1A0390A800154B14 /* AppDelegate.swift in Sources */,
+				810E875A1A038DC400154B14 /* ViewController.swift in Sources */,
+				810E875F1A0391A300154B14 /* CanvasView.swift in Sources */,
+				810E87581A038CAD00154B14 /* SpecTests.swift in Sources */,
 				81279AB11A02954100F32367 /* FingerPaintTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,8 +363,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FingerPaint/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -349,8 +375,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FingerPaint/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -407,6 +435,7 @@
 				81279AB61A02954100F32367 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		81279AB71A02954100F32367 /* Build configuration list for PBXNativeTarget "FingerPaintTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +444,7 @@
 				81279AB91A02954100F32367 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
