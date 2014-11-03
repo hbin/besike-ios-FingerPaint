@@ -12,17 +12,8 @@ class CanvasView: UIView {
     var paths = [Path]()
     private var newPath: Path?
 
-    var currentColor: CGColor = UIColor.redColor().CGColor {
-        didSet {
-            self.setNeedsDisplay()
-        }
-    }
-
-    var currentLineWidth: CGFloat = 2 {
-        didSet {
-            self.setNeedsDisplay()
-        }
-    }
+    var currentColor: CGColor = UIColor.redColor().CGColor
+    var currentLineWidth: CGFloat = 2.0
 
     func clear() {
         self.paths = []
@@ -36,7 +27,7 @@ class CanvasView: UIView {
         for path in paths {
             CGContextAddLines(context, path.points, UInt(path.points.count))
             CGContextSetStrokeColorWithColor(context, path.color)
-            CGContextSetLineWidth(context, path.width)
+            CGContextSetLineWidth(context, path.lineWidth)
             CGContextStrokePath(context);
         }
     }
@@ -44,7 +35,7 @@ class CanvasView: UIView {
     // *** Draw when user touches the screen ***
 
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.newPath = Path(color: self.currentColor, width: self.currentLineWidth)
+        self.newPath = Path(color: self.currentColor, lineWidth: self.currentLineWidth)
         self.paths.append(self.newPath!)
         addToPath(touches)
     }
@@ -70,11 +61,13 @@ class CanvasView: UIView {
 class Path {
     var points: [CGPoint] = []
     let color: CGColor
-    let width: CGFloat
+    let lineWidth: CGFloat
 
-    init(color: CGColor, width: CGFloat) {
+    init(color: CGColor, lineWidth: CGFloat) {
         self.color = color
-        self.width = width
+        self.lineWidth = lineWidth
+        println("color: \(self.color)")
+        println("lineWidh: \(self.lineWidth)")
     }
 
     func add(newPoint: CGPoint) {

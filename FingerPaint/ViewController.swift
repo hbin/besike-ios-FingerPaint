@@ -12,15 +12,15 @@ class ViewController: UIViewController {
 
     weak var canvasView: CanvasView!
     weak var clearButton: UIButton!
-
-    weak var selectedColorPicker: UIButton? {
+    weak var lineWidthSlider: UISlider!
+    weak var selectedColorPicker: UIButton! {
         didSet {
-            selectedColorPicker!.layer.shadowColor = UIColor(white: 0.4, alpha: 1).CGColor
-            selectedColorPicker!.layer.shadowOffset = CGSize(width: 0, height: 0)
-            selectedColorPicker!.layer.shadowRadius = 3
-            selectedColorPicker!.layer.shadowOpacity = 1
+            selectedColorPicker.layer.shadowColor = UIColor(white: 0.4, alpha: 1).CGColor
+            selectedColorPicker.layer.shadowOffset = CGSize(width: 0, height: 0)
+            selectedColorPicker.layer.shadowRadius = 3
+            selectedColorPicker.layer.shadowOpacity = 1
 
-            self.canvasView.currentColor = selectedColorPicker!.backgroundColor!.CGColor
+            self.canvasView.currentColor = selectedColorPicker.backgroundColor!.CGColor
         }
     }
 
@@ -34,6 +34,7 @@ class ViewController: UIViewController {
         self.view.addSubview(self.canvasView)
 
         setupColorPickers()
+        setupLineWidthSlider()
         setupClearButton()
     }
 
@@ -43,6 +44,10 @@ class ViewController: UIViewController {
         }
 
         self.selectedColorPicker = button
+    }
+
+    func lineWidthSliderValueChanged(slider: UISlider) {
+        self.canvasView.currentLineWidth = CGFloat(slider.value)
     }
 
     func clearButtonTapped(button: UIButton) {
@@ -81,11 +86,25 @@ class ViewController: UIViewController {
         }
     }
 
+    private func setupLineWidthSlider() {
+        let lineWidthSlider = UISlider()
+        lineWidthSlider.minimumValue = 1.0
+        lineWidthSlider.maximumValue = 5.0
+        lineWidthSlider.value = 2.0
+        lineWidthSlider.frame = CGRect(x: 33, y: 100, width: 253, height: 20)
+
+        self.lineWidthSlider = lineWidthSlider
+        self.view.addSubview(lineWidthSlider)
+
+        lineWidthSlider.addTarget(self, action: "lineWidthSliderValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+    }
+
     private func setupClearButton() {
         let button = UIButton.buttonWithType(UIButtonType.System) as UIButton
-        self.clearButton = button
         button.frame = CGRect(x: 267, y: 518, width: 37, height: 30)
         button.setTitle("Clear", forState: UIControlState.Normal)
+
+        self.clearButton = button
         self.view.addSubview(button)
 
         button.addTarget(self, action: "clearButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
