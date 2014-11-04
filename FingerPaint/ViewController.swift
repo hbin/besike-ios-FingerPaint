@@ -10,9 +10,28 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    weak var canvasView: CanvasView!
-    weak var clearButton: UIButton!
-    weak var lineWidthSlider: UISlider!
+    weak var canvasView: CanvasView! {
+        didSet {
+            canvasView.backgroundColor = UIColor.whiteColor()
+        }
+    }
+
+    weak var clearButton: UIButton! {
+        didSet {
+            clearButton.frame = CGRect(x: 267, y: 518, width: 37, height: 30)
+            clearButton.setTitle("Clear", forState: UIControlState.Normal)
+        }
+    }
+
+    weak var lineWidthSlider: UISlider! {
+        didSet {
+            lineWidthSlider.minimumValue = 1.0
+            lineWidthSlider.maximumValue = 5.0
+            lineWidthSlider.value = 2.0
+            lineWidthSlider.frame = CGRect(x: 33, y: 100, width: 253, height: 20)
+        }
+    }
+
     weak var selectedColorPicker: UIButton! {
         didSet {
             selectedColorPicker.layer.shadowColor = UIColor(white: 0.4, alpha: 1).CGColor
@@ -24,19 +43,18 @@ class ViewController: UIViewController {
         }
     }
 
+    // overrides ...........................................
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Instantiate the canvas view.
-        let canvasView = CanvasView(frame: self.view.bounds)
-        self.canvasView = canvasView
-        self.canvasView.backgroundColor = UIColor.whiteColor()
-        self.view.addSubview(self.canvasView)
-
-        setupColorPickers()
+        setupCanvasView()
+        setupColorPickersBtn()
         setupLineWidthSlider()
-        setupClearButton()
+        setupClearBtn()
     }
+
+    // actions ...........................................
 
     func colorPickerTapped(button: UIButton) {
         if let lastPicker = self.selectedColorPicker {
@@ -54,7 +72,16 @@ class ViewController: UIViewController {
         self.canvasView.clear()
     }
 
-    private func setupColorPickers() {
+    // private setups ...........................................
+
+    private func setupCanvasView() {
+        let canvasView = CanvasView(frame: self.view.bounds)
+
+        self.canvasView = canvasView
+        self.view.addSubview(canvasView)
+    }
+
+    private func setupColorPickersBtn() {
         let colors : [UIColor] = [
             UIColor(red: 0, green: 0, blue: 0, alpha: 1),
             UIColor(red: 0x17/255.0, green: 0xA3/255.0, blue: 0xA5/255.0, alpha: 1),
@@ -73,25 +100,20 @@ class ViewController: UIViewController {
 
         for (i, color) in enumerate(colors) {
             let rect  = rects[i]
-            let button = UIButton(frame: rect)
-
-            button.backgroundColor = color
-            self.view.addSubview(button)
+            let colorPickerBtn = UIButton(frame: rect)
+            colorPickerBtn.backgroundColor = color
 
             if i == 0 {
-                self.selectedColorPicker = button
+                self.selectedColorPicker = colorPickerBtn
             }
+            self.view.addSubview(colorPickerBtn)
 
-            button.addTarget(self, action: "colorPickerTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+            colorPickerBtn.addTarget(self, action: "colorPickerTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         }
     }
 
     private func setupLineWidthSlider() {
         let lineWidthSlider = UISlider()
-        lineWidthSlider.minimumValue = 1.0
-        lineWidthSlider.maximumValue = 5.0
-        lineWidthSlider.value = 2.0
-        lineWidthSlider.frame = CGRect(x: 33, y: 100, width: 253, height: 20)
 
         self.lineWidthSlider = lineWidthSlider
         self.view.addSubview(lineWidthSlider)
@@ -99,15 +121,13 @@ class ViewController: UIViewController {
         lineWidthSlider.addTarget(self, action: "lineWidthSliderValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
     }
 
-    private func setupClearButton() {
-        let button = UIButton.buttonWithType(UIButtonType.System) as UIButton
-        button.frame = CGRect(x: 267, y: 518, width: 37, height: 30)
-        button.setTitle("Clear", forState: UIControlState.Normal)
+    private func setupClearBtn() {
+        let clearBtn = UIButton.buttonWithType(UIButtonType.System) as UIButton
 
-        self.clearButton = button
-        self.view.addSubview(button)
+        self.clearButton = clearBtn
+        self.view.addSubview(clearBtn)
 
-        button.addTarget(self, action: "clearButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        clearBtn.addTarget(self, action: "clearButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
     }
 }
 

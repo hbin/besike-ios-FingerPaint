@@ -12,8 +12,8 @@ class CanvasView: UIView {
     var paths = [Path]()
     private var newPath: Path?
 
-    var currentColor: CGColor = UIColor.redColor().CGColor
-    var currentLineWidth: CGFloat = 2.0
+    var currentColor: CGColor?
+    var currentLineWidth: CGFloat?
 
     func clear() {
         self.paths = []
@@ -35,7 +35,7 @@ class CanvasView: UIView {
     // *** Draw when user touches the screen ***
 
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.newPath = Path(color: self.currentColor, lineWidth: self.currentLineWidth)
+        self.newPath = Path(color: self.currentColor?, lineWidth: self.currentLineWidth?)
         self.paths.append(self.newPath!)
         addToPath(touches)
     }

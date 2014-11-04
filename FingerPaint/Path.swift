@@ -11,12 +11,17 @@ import UIKit
 
 class Path {
     var points: [CGPoint] = []
-    let color: CGColor
-    let lineWidth: CGFloat
+    let color: CGColor = UIColor.blackColor().CGColor
+    let lineWidth: CGFloat = 2.0
 
-    init(color: CGColor, lineWidth: CGFloat) {
-        self.color = color
-        self.lineWidth = lineWidth
+    init(color: CGColor?, lineWidth: CGFloat?) {
+        if let c = color {
+            self.color = c
+        }
+
+        if let w = lineWidth {
+            self.lineWidth = w
+        }
     }
 
     func add(newPoint: CGPoint) {
