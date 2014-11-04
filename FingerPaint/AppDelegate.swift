@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
 
         // Load the storyboard from the main bundle.
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
         // Get the initial controller, and assign it to be the root controller.
         let controller = storyboard.instantiateInitialViewController() as UIViewController

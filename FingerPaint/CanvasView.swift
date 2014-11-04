@@ -66,8 +66,6 @@ class Path {
     init(color: CGColor, lineWidth: CGFloat) {
         self.color = color
         self.lineWidth = lineWidth
-        println("color: \(self.color)")
-        println("lineWidh: \(self.lineWidth)")
     }
 
     func add(newPoint: CGPoint) {
