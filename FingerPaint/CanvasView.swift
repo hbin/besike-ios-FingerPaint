@@ -58,17 +58,4 @@ class CanvasView: UIView {
     }
 }
 
-class Path {
-    var points: [CGPoint] = []
-    let color: CGColor
-    let lineWidth: CGFloat
 
-    init(color: CGColor, lineWidth: CGFloat) {
-        self.color = color
-        self.lineWidth = lineWidth
-    }
-
-    func add(newPoint: CGPoint) {
-        self.points.append(newPoint)
-    }
-}
