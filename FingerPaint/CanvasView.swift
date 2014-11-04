@@ -17,7 +17,7 @@ class CanvasView: UIView {
 
     func clear() {
         self.paths = []
-        self.setNeedsLayout()
+        self.setNeedsDisplay()
     }
 
     override func drawRect(rect: CGRect) {
